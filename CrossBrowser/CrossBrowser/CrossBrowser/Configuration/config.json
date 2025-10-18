@@ -1,0 +1,7 @@
+{
+  "baseUrl": "https://www.saucedemo.com",
+  "supportedBrowsers": [ "chrome", "firefox", "edge" ],
+  "implicitWait": 10,
+  "reportPath": "./Reports",
+  "parallelExecution": true
+}

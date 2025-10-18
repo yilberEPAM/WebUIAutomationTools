@@ -8,10 +8,20 @@ namespace CrossBrowser.TestScripts
 {
     public class Tests : TestBase
     {
+        private ExtentReports extent;
+        private ExtentTest test;
+
+        [SetUp]
+        public void ExtentSetup()
+        {
+            extent = ExtentManager.GetReporter();
+        }
+
         [Test]
         public void ValidLoginTest()
         {
-            driver.Navigate().GoToUrl("https://www.saucedemo.com");
+            test = extent.CreateTest("ValidLoginTest");
+            driver.Navigate().GoToUrl(BrowserConfig.Config["baseUrl"].ToString());
 
             LoginPage loginPage = new LoginPage(driver);
 
@@ -24,13 +34,14 @@ namespace CrossBrowser.TestScripts
             string actualUrl = driver.Url;
 
             Assert.Equals(expectedUrl, actualUrl);
-            TestContext.WriteLine("Login exitoso y el usuario fue redirigido a la página del inventario.");
+            test.Pass("Login exitoso y el usuario fue redirigido a la página del inventario.");
         }
 
         [Test]
         public void InvalidLoginTest()
         {
-            driver.Navigate().GoToUrl("https://www.saucedemo.com");
+            test = extent.CreateTest("InvalidLoginTest");
+            driver.Navigate().GoToUrl(BrowserConfig.Config["baseUrl"].ToString());
 
             LoginPage loginPage = new LoginPage(driver);
 
@@ -43,7 +54,13 @@ namespace CrossBrowser.TestScripts
             string actualErrorMessage = loginPage.GetErrorMessage();
 
             Assert.Equals(expectedErrorMessage, actualErrorMessage);
-            TestContext.WriteLine($"Login fallido con error: {actualErrorMessage}");
+            test.Pass($"Login fallido con error: {actualErrorMessage}");
+        }
+
+        [TearDown]
+        public void ReportTearDown()
+        {
+            extent.Flush();
         }
     }
 }
