@@ -33,14 +33,14 @@ CrossBrowser/
 ├── Configuration/                # Configuration files
 │   ├── config.json               # JSON file for dynamic settings
 │
-├── Tests/                        # Test scripts
-│   ├── LoginTests.cs             # Contains login-related tests
+├── TestsScripts/                 # Test scripts
+│   ├── Tests.cs                  # Contains login-related tests
 │
 ├── Reports/                      # Output folder for ExtentReports HTML
 │
 ├── .gitignore                    # Git ignore file
 ├── README.md                     # Project documentation
-├── CrossBrowser.csproj    # Project configuration file
+├── CrossBrowser.csproj           # Project configuration file
 
 ```
 
